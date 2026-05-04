@@ -3,7 +3,7 @@ import sqlite3
 from flask_bcrypt import Bcrypt
 
 app = Flask(__name__)
-app.secret_key = "super_clave_secreta"  # necesaria para sesiones
+app.secret_key = "super_clave_secreta"
 bcrypt = Bcrypt(app)
 
 DATABASE = "usuarios.db"
@@ -115,19 +115,11 @@ def procesar_login_web():
 @app.route("/tareas", methods=["GET"])
 def tareas():
     if "usuario" not in session:
-        return redirect(url_for("no_autorizado"))
+        return f""" <p>Debes iniciar sesión para acceder a las tareas.</p> """
 
     return f"""
-    <h1>Bienvenido {session['usuario']} al sistema de tareas</h1>
+    <h1>Bienvenido/a {session['usuario']} al sistema de tareas</h1>
     """
-
-
-@app.route("/no-autorizado")
-def no_autorizado():
-    return """
-    <p>Debes iniciar sesión para acceder a las tareas.</p>
-    """
-
 
 if __name__ == "__main__":
     app.run(debug=True)

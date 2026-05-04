@@ -15,15 +15,18 @@ Las contraseñas se almacenan hasheadas utilizando `flask-bcrypt` para mayor seg
 
 ## Instalación y Ejecución
 
-1. Instalar dependencias: `pip install flask flask-bcrypt requests`
-2. Ejecutar el servidor en consola `py servidor.py`. Se iniciará en `http://127.0.0.1:5000`
-3. En otra terminal ejecutar el cliente (opcional) `py cliente.py`
+- Instalar dependencias: `pip install flask flask-bcrypt requests`
+- Ejecutar el servidor en consola `py servidor.py`. Se iniciará en `http://127.0.0.1:5000`
+
+- Ejecutar el cliente desde consola
+  - En otra terminal ejecutar el cliente `py cliente.py`
+
+- Ejecutar el cliente desde el navegador
+  - Abrir el navegador en `http://127.0.0.1:5000/login-web`
 
 ### Base de Datos
 
-Se utiliza SQLite.
-
-El archivo `usuarios.db` se genera automáticamente al iniciar el servidor.
+Se utiliza SQLite. El archivo `usuarios.db` se genera automáticamente al iniciar el servidor.
 
 La tabla contiene:
 ```
@@ -33,9 +36,7 @@ clave (hasheada)
 ```
 
 ## Endpoints disponibles
-🔹 Registro de usuario
-
-POST /registro
+🔹 Registro de usuario `POST /registro`
 
 ```
 {
@@ -44,28 +45,24 @@ POST /registro
 }
 ```
 
-🔹 Inicio de sesión
-
-POST /login
-
-```
-{
-  "usuario": "nombre",
-  "clave": "1234"
-}
-```
+🔹 Inicio de sesión `POST /login`
 
 Si las credenciales son correctas, se crea una sesión.
 
-🔹 Tareas (Ruta protegida)
+```
+{
+  "usuario": "nombre",
+  "clave": "1234"
+}
+```
 
-GET /tareas
+🔹 Tareas (Ruta protegida) `GET /tareas`
 
-Si el usuario está autenticado → muestra la página de tareas.
-Si no está autenticado → redirige a /no-autorizado.
-🔹 Ruta de no autorizado
+Si el usuario está autenticado, muestra la página de tareas.
 
-GET /no-autorizado
+Si no está autenticado, muestra mensaje que se debe iniciar sesión.
 
-Muestra un mensaje indicando que el usuario debe iniciar sesión.
+
+
+
 
